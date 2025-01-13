@@ -1,5 +1,5 @@
 import React from "react";
-import VotingResults from "./components/VotingResults"; // Ajusta la ruta según tu estructura
+import VotingResults from "./components/VotingResults"
 
 const App: React.FC = () => {
   return (

@@ -68,37 +68,37 @@ const VotingResults: React.FC = () => {
     );
 
   return (
-    <Box p={3}>
-      <Typography variant="h4" gutterBottom>
+    <Box p={3} maxWidth={1000} margin={'auto'}>
+      <Typography variant="h4" gutterBottom >
         Voting Results
       </Typography>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>#</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell align="right">Yes Votes</TableCell>
-              <TableCell align="right">Yes %</TableCell>
-              <TableCell align="center">Threshold Status</TableCell>
-              <TableCell align="center">Yes {">"} No</TableCell>
-              <TableCell align="right">No Votes</TableCell>
+              <TableCell >#</TableCell>
+              <TableCell >Name</TableCell>
+              <TableCell align="right" >Yes Votes </TableCell>
+              <TableCell align="right" >Yes %</TableCell>
+              <TableCell align="center" >Threshold Status</TableCell>
+              <TableCell align="center" >Yes {">"} No</TableCell>
+              <TableCell align="right" >No Votes</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {results.map((result, index) => (
               <TableRow key={result.id}>
-                <TableCell>{index + 1}</TableCell>
-                <TableCell>{result.name}</TableCell>
-                <TableCell align="right">{result.yes.toLocaleString()}</TableCell>
-                <TableCell align="right">
+                <TableCell >{index + 1}</TableCell>
+                <TableCell >{result.name}</TableCell>
+                <TableCell  align="right">{result.yes.toLocaleString()}</TableCell>
+                <TableCell  align="right">
                   {result.yesPercentage.toFixed(1)}%
                 </TableCell>
-                <TableCell align="center">{result.thresholdStatus}</TableCell>
-                <TableCell align="center">
+                <TableCell  align="center">{result.thresholdStatus}</TableCell>
+                <TableCell  align="center">
                   {result.yes_wins ? "True" : "False"}
                 </TableCell>
-                <TableCell align="right">{result.no.toLocaleString()}</TableCell>
+                <TableCell  align="right">{result.no.toLocaleString()}</TableCell>
               </TableRow>
             ))}
           </TableBody>

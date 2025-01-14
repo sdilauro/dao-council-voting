@@ -77,7 +77,7 @@ const VotingResults: React.FC = () => {
         height: 'auto', 
       }}
       alt="DAO"
-      src="src/assets/dao-icon.png"
+      src="https://dclexplorer.com/static/media/dao-icon.19f5ee2d0bd3898f190e.png"
     />
      Voting Results
       </Typography>

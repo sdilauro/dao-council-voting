@@ -70,7 +70,16 @@ const VotingResults: React.FC = () => {
   return (
     <Box p={3} maxWidth={1000} margin={'auto'}>
       <Typography variant="h4" gutterBottom >
-        Voting Results
+      <Box
+      component="img"
+      sx={{
+        width: 40,
+        height: 'auto', 
+      }}
+      alt="DAO"
+      src="src/assets/dao-icon.png"
+    />
+     Voting Results
       </Typography>
       <TableContainer component={Paper}>
         <Table>

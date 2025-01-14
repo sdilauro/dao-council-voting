@@ -10,6 +10,7 @@ import {
   CircularProgress,
   Typography,
   Box,
+  Link,
 } from "@mui/material";
 import { fetchSortedResults } from "../api/votingResults";
 
@@ -23,6 +24,7 @@ interface SortedResult {
   totalVotes: number;
   yesPercentage: number;
   thresholdStatus: string;
+  link: string
 }
 
 const VotingResults: React.FC = () => {
@@ -98,7 +100,7 @@ const VotingResults: React.FC = () => {
             {results.map((result, index) => (
               <TableRow key={result.id}>
                 <TableCell >{index + 1}</TableCell>
-                <TableCell >{result.name}</TableCell>
+                <TableCell ><Link href={result.link} target="_blank" rel="noopener noreferrer" underline="none">{result.name}</Link></TableCell>
                 <TableCell  align="right">{result.yes.toLocaleString()}</TableCell>
                 <TableCell  align="right">
                   {result.yesPercentage.toFixed(1)}%

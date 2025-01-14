@@ -6,6 +6,7 @@ interface ProposalData {
   no: number;
   abstain: number;
   yes_wins: boolean;
+  link: string
 }
 
 
@@ -34,7 +35,7 @@ async function getVotingResults(proposalIds: string[]): Promise<Record<string, P
     };
 
     try {
-      const response = await axios.post<{ data: { proposal: { id: string; title: string; choices: string[]; scores: number[] } } }>(url, payload, { headers });
+      const response = await axios.post<{ data: { proposal: { id: string; title: string; choices: string[]; scores: number[], link: string } } }>(url, payload, { headers });
 
       if (response.status === 200) {
         const data = response.data;
@@ -44,6 +45,7 @@ async function getVotingResults(proposalIds: string[]): Promise<Record<string, P
           const choices = proposal.choices || [];
           const scores = proposal.scores || [];
           const title = proposal.title || "Untitled";
+          const link = 'https://snapshot.org/#/s:snapshot.dcl.eth/proposal/' + proposal.id
 
           const yesScore = choices.includes("yes") ? scores[choices.indexOf("yes")] : 0;
           const noScore = choices.includes("no") ? scores[choices.indexOf("no")] : 0;
@@ -57,7 +59,8 @@ async function getVotingResults(proposalIds: string[]): Promise<Record<string, P
             yes: yesScore,
             no: noScore,
             abstain: abstainScore,
-            yes_wins: yesScore > noScore
+            yes_wins: yesScore > noScore,
+            link
           };
         } else {
           results[proposalId] = { error: "Proposal not found" };
@@ -112,7 +115,8 @@ export async function fetchSortedResults() {
         yes_wins: proposalData.yes_wins,
         totalVotes: proposalData.yes + proposalData.no + proposalData.abstain,
         yesPercentage: (proposalData.yes / (proposalData.yes + proposalData.no + proposalData.abstain)) * 100 || 0,
-        thresholdStatus: proposalData.yes >= THRESHOLD ? "PASS" : "FAIL"
+        thresholdStatus: proposalData.yes >= THRESHOLD ? "PASS" : "FAIL",
+        link: 'https://snapshot.org/#/s:snapshot.dcl.eth/proposal/' + proposalId
       };
     })
     .sort((a, b) => b.yes - a.yes);

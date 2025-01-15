@@ -51,7 +51,6 @@ const VotingResults: React.FC = () => {
 
   const handleClick = (value:string) => {
     trackEvent("Click", "Link", value);
-    console.log(value)
   };
 
   if (loading)

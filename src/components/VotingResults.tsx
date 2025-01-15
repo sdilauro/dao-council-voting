@@ -13,6 +13,7 @@ import {
   Link,
 } from "@mui/material";
 import { fetchSortedResults } from "../api/votingResults";
+import { trackEvent } from "../analytics";
 
 interface SortedResult {
   id: string;
@@ -47,6 +48,11 @@ const VotingResults: React.FC = () => {
 
     fetchResults();
   }, []);
+
+  const handleClick = (value:string) => {
+    trackEvent("Click", "Link", value);
+    console.log(value)
+  };
 
   if (loading)
     return (
@@ -100,7 +106,7 @@ const VotingResults: React.FC = () => {
             {results.map((result, index) => (
               <TableRow key={result.id}>
                 <TableCell >{index + 1}</TableCell>
-                <TableCell ><Link href={result.link} target="_blank" rel="noopener noreferrer" underline="none">{result.name}</Link></TableCell>
+                <TableCell ><Link href={result.link} target="_blank" rel="noopener noreferrer" underline="none" onClick={()=>{handleClick(result.name)}}>{result.name}</Link></TableCell>
                 <TableCell  align="right">{result.yes.toLocaleString()}</TableCell>
                 <TableCell  align="right">
                   {result.yesPercentage.toFixed(1)}%

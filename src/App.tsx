@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import VotingResults from "./components/VotingResults"
 import { Link, Typography } from "@mui/material";
 import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';
+import { initializeGA } from "./analytics";
 
 const App: React.FC = () => {
+
+  useEffect(() => {
+    initializeGA();
+  }, []);
+
+
+
+
+
   return (
     <div style={{ padding: "20px" }}>
       <VotingResults />
